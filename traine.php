@@ -115,7 +115,7 @@ if(!isset($_SESSION['token']))
                     <a href="#!" class="collection-item bold">Train</a>
                     <div class="asd">
                         <a href="#!" class="collection-item active">Flash Cards</a><a href="#!" class="collection-item">Audio Training</a>
-                        <a href="#!" class="collection-item">Speech Training</a>
+                        <a href="speech.php" class="collection-item">Speech Training</a>
                     </div>
                     <a href="#!" class="collection-item">Materials</a>
                     <a href="examplechat.php" class="collection-item ">Chat</a>

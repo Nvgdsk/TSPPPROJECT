@@ -122,6 +122,15 @@ if(!isset($_SESSION['token']))
             <a href="#!" class="modal-close waves-effect waves-green btn-flat">Закрыть</a>
         </div>
     </div>
+     <div id="modal2" class="modal">
+        <div class="modal-content" id="conProf">
+
+
+        </div>
+        <div class="modal-footer">
+            <a href="#!" class="modal-close waves-effect waves-green btn-flat">Закрыть</a>
+        </div>
+    </div>
 
     <div class="container">
         <ul id='dropdown1' class='dropdown-content'>
@@ -283,7 +292,21 @@ if(!isset($_SESSION['token']))
                 });
 
             })
-           
+            $('#field_message').on('click', '.user_m_id', function() {
+               
+                let id = $(this).attr('id');
+                $.ajax({
+                    type: 'POST',
+                    url: 'jq_link.php?a=getuserinfo',
+                    data: 'user_id=' + id,
+
+                    success: function(data) {
+
+                        $('#conProf').html(data);
+                        $('#modal2').modal('open');
+                    }
+                });
+            })
             setInterval(function(){
                 var hhref = $(location).attr('href');
                 var lastIndex = hhref.lastIndexOf("namechat=");
@@ -300,14 +323,28 @@ if(!isset($_SESSION['token']))
                     data: 'user_id=' + id,
 
                     success: function(data) {
-
+               
                         $('#conProf').html(data);
                         $('#modal2').modal('open');
                     }
                 });
             })
         });
+        $("#modal2").on('click','.sendml',
+                        function()
+                       {
+           let reciver_id = $(this).attr('id');
+             $.ajax({
+                    type: 'POST',
+                    url: 'jq_link.php?a=createchat',
+                    data: 'reciver_id=' + reciver_id,
 
+                    success: function(data) {
+               
+                        
+                    }
+                });
+        })
     </script>
 </body>
 

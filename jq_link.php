@@ -50,5 +50,7 @@ switch ($action)
     case 'getuserinfo':
         getuserinfo();
         break;
+    case 'createchat':
+        break;
 }
 ?>

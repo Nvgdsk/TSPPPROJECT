@@ -54,7 +54,8 @@ class user{
         <h4>Sname: ".$res1['secondname']."<h3>
         <h4>Number: ".$res1['number']."<h3>
         <h4>Role: ".$res1['role']."<h3>
-        <h4>Group: ".$res1['group_id']."<h3>";
+        <h4>Group: ".$res1['group_id']."<h3>
+        <a href='#!' class = 'btn sendml' id ='$id'>send message</a>";   
     }
     public function generateRandomString() 
     {

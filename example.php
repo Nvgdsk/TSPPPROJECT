@@ -79,8 +79,15 @@ if(!isset($_SESSION['token']))
         padding: 0px;
 
     }
-    .GO{
+
+    .GO {
         margin-bottom: 10px;
+    }
+    .downrow{
+        height: 27vh;
+    }
+    .downrow  .card{
+        height: 27vh;
     }
 </style>
 
@@ -104,41 +111,46 @@ if(!isset($_SESSION['token']))
                     </div>
                     <a href="#!" class="collection-item">Materials</a>
                     <a href="examplechat.php" class="collection-item">Chat</a>
-
+                
+                   
+                
                 </div>
-            </div>
-            <div class="col s9" id="rightpan">
                 <div class="row">
+                    <div class="col s3" >
+                     <a href='#!' id ="EXIT"><i class="material-icons right">exit_to_app</i></a>
+                </div></div>
+            </div>
+            <div class="col s9" >
+                <div class="row" id="rightpan">
                     <div class="col s3 right">
-                       <div class = "center">
-                        <img class="responsive-img circle " src="img/1.jpg" style="border-style: dashed;">
-                      
-    <div class="card horizontal">
-      
-      <div class="card-stacked">
-        <div class="card-content left">
-          <p>Name:
-                <?php echo $_SESSION["name"];?>
-            </p>
-            <p>Second name:
-                <?php echo $_SESSION["sname"];?>
-            </p>
-            <p>Mobile number:
-                <?php echo $_SESSION["num"];?>
-            </p>
-            <p>Group:</p>
-        </div>
-    
-      </div>
-    </div>
+                        <div class="center">
+                            <img class="responsive-img circle " src="img/1.jpg" style="border-style: dashed;">
+
+                            <div class="card horizontal">
+
+                                <div class="card-stacked">
+                                    <div class="card-content left">
+                                        <p>Name:
+                                            <?php echo $_SESSION["name"];?>
+                                        </p>
+                                        <p>Second name:
+                                            <?php echo $_SESSION["sname"];?>
+                                        </p>
+                                        <p>Mobile number:
+                                            <?php echo $_SESSION["num"];?>
+                                        </p>
+                                        <p>Group:</p>
+                                    </div>
+
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="row">
-
-                <div class="row">
-                    <div class="col s3">
+                   <div class="row">
+                    
+                    <div class="downrow">
+                    <div class="col s4">
                         <div class="card">
                             <div class="card-content">
                                 <span class="card-title center">Vocabulary</span>
@@ -152,7 +164,7 @@ if(!isset($_SESSION['token']))
                             </div>
                         </div>
                     </div>
-                    <div class="col s3">
+                    <div class="col s4">
                         <div class="card">
                             <div class="card-content">
                                 <span class="card-title center">Lessons</span>
@@ -166,7 +178,7 @@ if(!isset($_SESSION['token']))
                             </div>
                         </div>
                     </div>
-                    <div class="col s3">
+                    <div class="col s4">
                         <div class="card">
                             <div class="card-content">
                                 <span class="card-title center">TESTS</span>
@@ -182,12 +194,14 @@ if(!isset($_SESSION['token']))
                     </div>
 
 
-                </div>
-
+                </div></div>
             </div>
-        </div>
 
+
+        </div>
     </div>
+
+
     <script>
         $(document).ready(function() {
             $('.sidenav').sidenav();

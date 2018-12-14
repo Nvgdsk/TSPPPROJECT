@@ -98,11 +98,11 @@ if(!isset($_SESSION['token']))
         <div class="row no-padign">
             <div class="col s3" id="leftP">
                 <div class="collection">
-                    <a href="example.php" class="collection-item ">Home</a>
+                    <a href="example.php" class="collection-item active">Home</a>
                     <a href="#!" class="collection-item bold">Train</a>
                     <div class="asd">
                         <a href="traine.php" class="collection-item">Flash Cards</a><a href="#!" class="collection-item">Audio Training</a>
-                        <a href="speech.php" class="collection-item active">Speech Training</a>
+                        <a href="speech.php" class="collection-item">Speech Training</a>
                     </div>
                     <a href="#!" class="collection-item">Materials</a>
                     <a href="examplechat.php" class="collection-item">Chat</a>
