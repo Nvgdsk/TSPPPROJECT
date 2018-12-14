@@ -7,7 +7,7 @@ if(isset($_SESSION['token']))
 }
 ?>
 
-<html lang="en">
+<html>
 
 <head>
 
@@ -468,16 +468,20 @@ a {
         </ul>
         <div class="panel__wrap">
             <div class="panel__box active" id="signInBox">
-                <label>Email
+               <form id='auform'>
+                   <label>Email
                     <input type="email" name="loginA" />
                 </label>
                 <label>Password
                     <input type="password" name="password" />
                 </label>
+               </form>
+                
                <a id="logbut" href="#!" style="    margin-left: 150px;">Авторизация</a>
                 
             </div>
             <div class="panel__box" id="signUpBox">
+               <form id ="regform">
                 <label>Email
                     <input type="email" name='login' />
                 </label>
@@ -505,6 +509,7 @@ a {
                 <label>GROUP(FOR EXAMPLE DA-62)
                     <input type="email"name='group'  />
                 </label>
+                </form>
                <a id='regbut' href="#!">Регистрация</a>
 
                
@@ -573,6 +578,7 @@ a {
             $('#abut').addClass('hide');
         })
         $('#regbut').on('click', function() {
+            
             var fin = 0;
             $('#regform input').each(function(i, elem) {
                 if ($(this).val() == '') {
@@ -603,6 +609,7 @@ a {
             }
         })
         $('#logbut').on('click', function() {
+            alert($("#auform input[name=loginA]").val())
             $.ajax({
                 url: 'jq_link.php?a=au', //url страницы (action_ajax_form.php)
                 type: "POST", //метод отправки

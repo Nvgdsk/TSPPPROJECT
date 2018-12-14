@@ -119,7 +119,7 @@ class Chat{
             
             if($uid==$From_id)
             {
-                $b = "<div class='row'>
+                $b = "<div class='MessageC' id ='$id'><div class='row'>
         <div class='col s6 offset-s1'>
             <div class='user_m_id' id=' $From_id'>$name $sname </div>
         </div>
@@ -136,7 +136,7 @@ class Chat{
             </div>
         </div>
     </div>
-</div>";
+</div></div>";
             }
             else
             {

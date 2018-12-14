@@ -10,7 +10,7 @@ if(!isset($_SESSION['token']))
 
 <head>
     <!--Import Google Icon Font-->
-     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <!--Import materialize.css-->
     <link type="text/css" rel="stylesheet" href="css/materialize.min.css" media="screen,projection" />
     <script src="js/jquery-3.3.1.min.js"></script>
@@ -144,9 +144,11 @@ if(!isset($_SESSION['token']))
                 </div>
             </div>
             <div class="col s9" id="rightpan">
-               <div class = "row">  <div id='ChatH'>
+                <div class="row">
+                    <div id='ChatH'>
 
-                </div></div>
+                    </div>
+                </div>
                 <div id="send_chat_message">
                     <div class="row">
                         <div id="field_message" style="height: 62vh; background-color:white;overflow-y: scroll;">
@@ -175,15 +177,17 @@ if(!isset($_SESSION['token']))
 
     </div>
     <script>
-  $(document).ready(function() {
-            
+        $(document).ready(function() {
+
             $('.sidenav').sidenav();
             $('.modal').modal();
             $("#field_message").scrollTop('9999999999');
 
             $('#ChatH').on('click', '.groupClass', function() {
                 let a = $(this).attr('id');
+                localStorage['lastChannel'] =  a;
                 $('#field_message').html('');
+                
                 setLocation('http://tspp/examplechat.php?namechat=' + a);
                 getMessageChat(a);
             });
@@ -208,7 +212,7 @@ if(!isset($_SESSION['token']))
 
                         $('#field_message').append(data);
 
- $("#field_message").scrollTop('9999999999');
+                        
 
                     }
                 });
@@ -221,48 +225,57 @@ if(!isset($_SESSION['token']))
                     success: function(data) {
 
                         $('#ChatH').append(data);
-                        $lid = $('#ChatH').children().last().attr('id');
-                        console.log($lid);
-                        setLocation('http://tspp/examplechat.php?namechat=' + $lid);
-                        var hhref = $(location).attr('href');
-                        var lastIndex = hhref.lastIndexOf("namechat=");
-
-                        hhref = hhref.substring((lastIndex + 9), 50);
-
-                        getMessageChat(hhref);
- $('.tooltipped').tooltip();
+                        var lid = $('#ChatH').children().last().attr('id');
+                        console.log(lid);
+                        if( localStorage['lastChannel']!='')
+                        {
+                            lid=localStorage['lastChannel'];
+                        }
+                        setLocation('http://tspp/examplechat.php?namechat=' + lid);
+                         getMessageChat(lid);
+                        $('.tooltipped').tooltip();
                     }
                 });
             }
             getchat();
-     
+
             $("#sendmessage").on('click', function() {
-                console.log('asdasd');
+                var url = window.location.href;
+
+                var now = new Date();
+                var time = now.getFullYear() + '-' + (now.getMonth() + 1) + '-' + now.getDate() + ' ' + now.getHours() + ':' + now.getMinutes() + ':' + now.getSeconds();
+
                 let message = $("#inputMM").val();
-                let count = $(".MessageC").length;
-                let a = `<div class ='MessageC' id ="${(count+1)}"> 
-            
-        <div class="grey lighten-5 z-depth-1">
-          <div class="row valign-wrapper">
-            <div class="col s2">
-              <img src="img/1.jpg" alt="" class="circle responsive-img"> <!-- notice the "circle" class -->
+                let counts = (Number($(".MessageC").last().prop('id'))+1);
+                let a = `<div class='MessageC' id ='${(counts)}'><div class='row'>
+                <div class='col s6 offset-s1'>
+                    <div class='user_m_id' id='<?php echo $_SESSION['USER_ID'];?>'></div>
+        <?php echo $_SESSION['name'].' '.$_SESSION['sname'];?>
+                </div>
+                <div class = 'col s4 right'>
+                    <div class='dateM'>${time} </div>
+                </div>
             </div>
-            <div class="col s10">
-              <span class="black-text">
-                ${message}
-              </span>
+            <div class='row'>
+                <div class='col s1 offset-s1'>
+                    <img src='img/1.jpg' alt='' class='circle responsive-img'>
+                </div><div class='col s9'>
+                    <div>
+                     ${message}
+                    </div>
+                </div>
             </div>
-          </div>
-        </div>
-      </div>
-            `;
+        </div></div>
+                    `;
+                var hhref = $(location).attr('href');
+                var lastIndex = hhref.lastIndexOf("namechat=");
+
+               hhref = hhref.substring((lastIndex + 9), (lastIndex + 18));
                 $("#field_message").append(a);
                 $.ajax({
                     type: 'POST',
                     url: 'jq_link.php?a=sendmessage',
-                    data: 'message=' + message + '&namechat=' +
-                        <?php if(isset($_GET['namechat']))echo $_GET['namechat'];
-                 else echo '-1';?>,
+                    data: 'message=' + message + '&namechat=' + hhref,
                     success: function(data) {
 
                         console.log(data);
@@ -270,10 +283,14 @@ if(!isset($_SESSION['token']))
                 });
 
             })
-            setTimeout(function() {
-                $("#field_message").scrollTop('9999999999');
-            }, 1000);
+           
+            setInterval(function(){
+                var hhref = $(location).attr('href');
+                var lastIndex = hhref.lastIndexOf("namechat=");
 
+           hhref = hhref.substring((lastIndex + 9), (lastIndex + 18));
+                getMessageChat(hhref);
+            },1000);
 
             $('#field_message').on('click', '.user_m_id', function() {
                 let id = $(this).attr('id');
@@ -290,6 +307,7 @@ if(!isset($_SESSION['token']))
                 });
             })
         });
+
     </script>
 </body>
 
