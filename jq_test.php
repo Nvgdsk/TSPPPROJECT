@@ -12,10 +12,12 @@ switch ($action)
        // print_r('reg');
         addtest($_POST);
         break;
-    case 'gettest':
-        gettest($_POST);
+    case 'getnametest':
+        getnametest($_POST);
         break;
-
+    case  'getQ':
+        getQ();
+        break;
    
 }
 ?>

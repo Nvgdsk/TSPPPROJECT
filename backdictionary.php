@@ -14,8 +14,12 @@ public function addtodb()
     {
          global $mysqli;
         
-        $mysqli->query("INSERT INTO `maindictionary`(`Eng`, `Ua`) VALUES ('$this->engword','$this->ua_word')");
+        $mysqli->query("INSERT INTO `maindictionary`(`Eng`, `Ua`,`Description`) VALUES ('$this->engword','$this->ua_word','Soon')");
          $mysqli->close();
+        $mysqli->query("INSERT INTO `english_word`(`eng_word`) VALUES ('$this->engword')");
+             $mysqli->close();
+        $mysqli->query("INSERT INTO `maindictionary`(`ukrainian_word`) VALUES ('$this->ua_word')");
+             $mysqli->close();
     }
 public function getwords()
 {
@@ -25,8 +29,9 @@ public function getwords()
     echo'<table>
         <thead>
           <tr>
-              <th class = "center">English</th>
-              <th class = "center">Ukrainian</th>
+              <th class = "center">ENGLISH</th>
+              <th class = "center">UKRAINIAN</th>
+               <th class = "center">DEFENITION</th>
           </tr>
         </thead>
 
@@ -38,8 +43,9 @@ public function getwords()
         {
             $ua = $row['Ua'];
             $eng = $row['Eng'];
-           
-            echo "<tr><td class = 'center'>$eng</td><td class = 'center'>$ua</td></td>";
+            $dd=$row['Description'];
+            echo "<tr><td class = 'center'>$eng</td><td class = 'center'>$ua</td>
+            <td class = 'center'>$dd</td></tr>";
         }
     echo "  </tbody>
       </table>";

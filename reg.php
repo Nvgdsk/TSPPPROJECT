@@ -46,15 +46,15 @@ class user{
     public function getuserinfo($id)
     {
         global $mysqli;
-        $res1 = $mysqli->query("SELECT * FROM `profileatr` Where `user_id`='$id' ");
+        $res1 = $mysqli->query("SELECT * FROM `users` Where `ID`='$id' ");
         $res1 = mysqli_fetch_assoc($res1);
         echo "
-        <h3 class = 'center'>Profile by ".$res1['name']."<h3>
-        <h4>Name: ".$res1['name']."<h3>
-        <h4>Sname: ".$res1['secondname']."<h3>
+        <h3 class = 'center'>Profile by ".$res1['uname']."<h3>
+        <h4>Name: ".$res1['uname']."<h3>
+        <h4>Sname: ".$res1['usecondname']."<h3>
         <h4>Number: ".$res1['number']."<h3>
         <h4>Role: ".$res1['role']."<h3>
-        <h4>Group: ".$res1['group_id']."<h3>
+        <h4>Group: ".$res1['groupID']."<h3>
         <a href='#!' class = 'btn sendml' id ='$id'>send message</a>";   
     }
     public function generateRandomString() 
@@ -72,11 +72,10 @@ class user{
     public function addtodb()
     {
          global $mysqli;
-        $mysqli->query("INSERT INTO `users`(`email`, `password`, `activation`)
-                         VALUES('$this->login','$this->password','$this->activation')");
+        $mysqli->query("INSERT INTO `users`(`email`, `pass`, `token`,`uname`,`usecondname`,`number`,`groupID`,`role`)
+                         VALUES('$this->login','$this->password','$this->activation','$this->name','$this->secondname','$this->number','$this->group','$this->role')");
         $id_user = $mysqli->insert_id;
-        $mysqli->query("INSERT INTO `profileatr`(`user_id`, `name`, `secondname`, `number`, `group_id`, `role`)
-                         VALUES('$id_user','$this->name','$this->secondname','$this->number','$this->group','$this->role')");
+        
         $a = $mysqli->query("SELECT * FROM `chatid` where `NAME`= '$this->group'");
         if(mysqli_num_rows($a)==NULL)
         {
@@ -95,12 +94,12 @@ class user{
     {   
         global $mysqli;
         $email = $this->login;
-        $row = $mysqli->query("SELECT `id` FROM `users`
+        $row = $mysqli->query("SELECT `ID` FROM `users`
                     WHERE `email`='$email'");
         $row = mysqli_fetch_assoc($row);
         
         
-        if(empty($row['id']))
+        if(empty($row['ID']))
         {
             
             return 1;
@@ -119,16 +118,16 @@ class user{
     {
          global $mysqli;
         $res = $mysqli->query("SELECT * FROM `users`
-                           Where `email`='$this->login' AND `password` = '$this->password' ");
+                           Where `email`='$this->login' AND `pass` = '$this->password' ");
         $res = mysqli_fetch_assoc($res);
 
-        $res = $res['id'];
+        $res = $res['ID'];
         print_r('1');
  
        session_start();
         if(empty($res))
         {
-             print_r('affffff');
+             
              $_SESSION['token']='0';
 
         }
@@ -136,12 +135,12 @@ class user{
             
             $_SESSION['token']='1';
              $_SESSION['USER_ID']=$res;
-             $res1 = $mysqli->query("SELECT * FROM `profileatr`Where `user_id`='$res' ");
+             $res1 = $mysqli->query("SELECT * FROM `users`Where `ID`='$res' ");
              
              $res1 = mysqli_fetch_assoc($res1);
                       
-             $_SESSION['name']=$res1['name'];
-             $_SESSION['sname']=$res1['secondname'];
+             $_SESSION['name']=$res1['uname'];
+             $_SESSION['sname']=$res1['usecondname'];
              $_SESSION['num']=$res1['number'];
              $_SESSION['role']=$res1['role'];
              
@@ -155,12 +154,12 @@ class user{
     public function getNameGroup()
     {
         global $mysqli;
-        $s = $mysqli->query("SELECT `Name` FROM `chatid` WHERE 1");
+        $s = $mysqli->query("SELECT `NAME` FROM `chatid` WHERE 1");
         
         $a = [];
         while($res = mysqli_fetch_assoc($s))
         {
-             $name  = $res['Name'];
+             $name  = $res['NAME'];
             $temp[]['name'] =$name; 
            
              

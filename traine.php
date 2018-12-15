@@ -56,7 +56,9 @@ if(!isset($_SESSION['token']))
         margin-bottom: 0px;
         padding: 0px;
     }
-
+    h4{
+        margin-top: 16vh;
+    }
     .collection {
         border: 0px;
     }
@@ -90,6 +92,10 @@ if(!isset($_SESSION['token']))
     .row .col.s2 {
         width: 50px;
     }
+    #start{
+        z-index: 10;
+        margin-top: 35vh;
+    }
     #ChatH::-webkit-scrollbar { width: 0; }
 
 /* ie 10+ */
@@ -109,20 +115,24 @@ if(!isset($_SESSION['token']))
 
         </ul>
         <div class="row no-padign">
-            <div class="col s3" id="leftP">
-                <div class="collection">
-                    <a href="example.php" class="collection-item ">Home</a>
-                    <a href="#!" class="collection-item bold">Train</a>
-                    <div class="asd">
-                        <a href="#!" class="collection-item active">Flash Cards</a><a href="#!" class="collection-item">Audio Training</a>
-                        <a href="speech.php" class="collection-item">Speech Training</a>
-                    </div>
-                    <a href="#!" class="collection-item">Materials</a>
-                    <a href="examplechat.php" class="collection-item ">Chat</a>
-
-                </div>
+            <div class="col s1 center" id="leftP">
+               
+                       <a href="example.php" class="center  "><i class="medium material-icons">face</i></a>
+                    <a href="pretraine.php" class="center"><i class="medium material-icons">extension</i></a>
+                    <a href="dictionary.php" class="center "><i class="medium material-icons">import_contacts</i></a>
+                    <a href="examplechat.php" class="center"><i class="medium material-icons">chat_bubble_outline</i></a>
+                    <a href="#!" class="center"><i class="medium material-icons">book</i></a>
+                    <a href="#!" class="center"><i class="medium material-icons">reorder</i></a>
+                    <a href="test.php" class="center"><i class="medium material-icons">format_list_bulleted</i></a>
+                    
+                
             </div>
-            <div class="col s9" id="rightpan">
+            <div class="col s11" id="rightpan">
+            <div class = "center">
+             <a href="#" id="start" class="medium  btn-large center pulse ">
+             Start    
+             </a>
+             </div>
               <div class="row" id='cardgame'>
 
 
@@ -155,7 +165,9 @@ if(!isset($_SESSION['token']))
             });
 
         })
-        $.ajax({
+        $("#start").on('click',function(){
+             $("#start").hide();
+          $.ajax({
             type: 'POST',
             url: 'jq_link.php?a=getcard',
             success: function(data) {
@@ -163,7 +175,9 @@ if(!isset($_SESSION['token']))
                 $('#cardgame').html(data);
 
             }
+        }) 
         })
+        
 
 
     </script>

@@ -51,6 +51,12 @@ if(!isset($_SESSION['token']))
         border-left: 0px;
         background-color: white;
     }
+    #rrightpan{
+        height: 85vh;
+        border: 2px solid rgba(128, 128, 128, 0.47);
+        border-left: 0px;
+        background-color: white;
+    }
 
     .row {
         margin-bottom: 0px;
@@ -85,7 +91,14 @@ if(!isset($_SESSION['token']))
     }
     #MyDict{
          overflow-y: scroll;
-    height: 50vh;
+    height: 74vh;
+    }
+    a{
+        color:black;
+    }
+    
+    .act{
+         color:lightcoral;
     }
 </style>
 
@@ -99,41 +112,50 @@ if(!isset($_SESSION['token']))
 
         </ul>
         <div class="row no-padign">
-            <div class="col s3" id="leftP">
-                <div class="collection">
-                    <a href="example.php" class="collection-item active">Home</a>
-                    <a href="#!" class="collection-item bold">Train</a>
-                    <div class="asd">
-                        <a href="traine.php" class="collection-item">Flash Cards</a><a href="#!" class="collection-item">Audio Training</a>
-                        <a href="speech.php" class="collection-item">Speech Training</a>
-                    </div>
-                    <a href="#!" class="collection-item">Materials</a>
-                    <a href="examplechat.php" class="collection-item">Chat</a>
-
-                </div>
+            <div class="col s1 center" id="leftP">
+               
+                    <a href="example.php" class="center  "><i class="medium material-icons">face</i></a>
+                    <a href="pretraine.php" class="center"><i class="medium material-icons">extension</i></a>
+                    <a href="dictionary.php" class="center act"><i class="medium material-icons">import_contacts</i></a>
+                    <a href="examplechat.php" class="center"><i class="medium material-icons">chat_bubble_outline</i></a>
+                    <a href="#!" class="center"><i class="medium material-icons">book</i></a>
+                    <a href="#!" class="center"><i class="medium material-icons">reorder</i></a>
+                    <a href="test.php" class="center"><i class="medium material-icons">format_list_bulleted</i></a>
+                    
+                
             </div>
-            <div class="col s9" id="rightpan">
+            <div class="col s9" id="rrightpan">
+
+
+                <div id="MyDict">
+                </div>
                 <div class="row">
                     <form class="col s12">
                         <div class="row">
-                            <div class="input-field col s6">
+                            <div class="input-field col s3">
                                 <input id="eng" type="text" class="validate">
-                                <label for="eng">Word</label>
+                                <label for="eng">ENGLISH</label>
                             </div>
 
-                            <div class="input-field col s6">
+                            <div class="input-field col s3">
                                 <input id="ua" type="text" class="validate">
-                                <label for="ua">Слово</label>
+                                <label for="ua">UKRAINIAN</label>
                             </div>
-                            <a class="btn right" id="translateaddtodatabase">Добавить в словарь</a>
+                            <div class="input-field col s3">
+                                <input id="ua" type="text" class="validate">
+                                <label for="ua">DEFENITION</label>
+                            </div>
+                            <div class="input-field col s3">
+                                <a class="btn right" id="translateaddtodatabase">Добавить</a>
+                            </div>
                         </div>
+                      
                     </form>
                 </div>
-                <h3 class="center">Словарь</h3>
-                <div id="MyDict">
-                </div>
-
             </div>
+            <div class="col s2" id="rrightpan">
+                <h5 class="center">Dictionary</h5>
+            </div> 
         </div>
     </div>
     <script>
@@ -153,6 +175,7 @@ if(!isset($_SESSION['token']))
             });
 
         })
+
         function getwords() {
             $.ajax({
                 type: 'POST',

@@ -15,16 +15,24 @@ class Chat{
     {
          $this->lastmsg=$setlastmsg;
     }
+    private function checkchat($idpartner)
+    {
+         global $mysqli;
+    }
+    public function createchat($idpartner)
+    {
+        
+    }
     function getChat()
     {
         global $mysqli;
         $uid= $this->user_id;
-        $a = $mysqli->query("SELECT ci.Name, ci.Chat_id FROM `userchat` as u JOIN `chatid` as ci on u.Chat_id=ci.Chat_id WHERE u.UserID='$uid'");
+        $a = $mysqli->query("SELECT ci.NAME, ci.Chat_id FROM `userchat` as u JOIN `chatid` as ci on u.Chat_id=ci.Chat_id WHERE u.UserID='$uid'");
         
         while($row = mysqli_fetch_assoc($a))
         {
             $id = $row['Chat_id'];
-            $name = $row['Name'];
+            $name = $row['NAME'];
            
           echo "<div id = '$id' class = 'groupClass center'>
            <div class='col s2 center'>
@@ -43,7 +51,7 @@ class Chat{
     {
         global $mysqli;
         $uid= $this->user_id;
-        $a = $mysqli->query("SELECT ");
+        $a = $mysqli->query("SELECT   ");
         
         while($row = mysqli_fetch_assoc($a))
         {
@@ -70,7 +78,7 @@ class Chat{
         $uid= $this->user_id;
         $cn = $this-> chat_name;
           
-        $mysqli->query("INSERT INTO `chatmessage`( `Message`, `From_id`, `Chat_id`) VALUES ('$text','$uid','$cn')");
+        $mysqli->query("INSERT INTO `message`( `message`, `fromID`, `chatID`) VALUES ('$text','$uid','$cn')");
        
         $mysqli->close();
     }
@@ -80,7 +88,7 @@ class Chat{
         $uid= $this->user_id;
          
         $res = $mysqli->query("SELECT * FROM `userchat`
-                           Where `UserId`='$uid' AND `Chat_id` = '$this->chat_name' ");
+                           Where `UserID`='$uid' AND `Chat_id` = '$this->chat_name' ");
         
         $res = mysqli_fetch_assoc($res);
        
@@ -97,25 +105,25 @@ class Chat{
         }
          else{
            
-        $b = $mysqli->query("SELECT `id`,`Message`,`From_id`,`DateM` FROM `chatmessage` WHERE `Chat_id`='$this->chat_name' ORDER BY `id` DESC LIMIT 1");
+        $b = $mysqli->query("SELECT `ID`,`message`,`fromID`,`datemess` FROM `message` WHERE `chatID`='$this->chat_name' ORDER BY `ID` DESC LIMIT 1");
         $row = mysqli_fetch_assoc($b);
-        if($row['id']!=$this->lastmsg)
+        if($row['ID']!=$this->lastmsg)
         {
             
-        $a = $mysqli->query("SELECT `id`,`Message`,`From_id`,`DateM` FROM `chatmessage` WHERE `Chat_id`='$this->chat_name' AND `id`>'$this->lastmsg'");
+        $a = $mysqli->query("SELECT `ID`,`message`,`fromID`,`datemess` FROM `message` WHERE `chatID`='$this->chat_name' AND `ID`>'$this->lastmsg'");
         
         while($row = mysqli_fetch_assoc($a))
         {
-            $From_id = $row['From_id'];
-            $message = $row['Message'];
-            $date = $row['DateM'];
-            $id = $row['id'];
+            $From_id = $row['fromID'];
+            $message = $row['message'];
+            $date = $row['datemess'];
+            $id = $row['ID'];
             $b ='';
             $c = '';
-            $trow = $mysqli->query("SELECT * FROM `profileatr` where `user_id`='$From_id'");
+            $trow = $mysqli->query("SELECT * FROM `users` where `ID`='$From_id'");
             $trow = mysqli_fetch_assoc($trow);
-            $name = $trow['name'];
-            $sname = $trow['secondname'];
+            $name = $trow['uname'];
+            $sname = $trow['usecondname'];
             
             if($uid==$From_id)
             {

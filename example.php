@@ -46,10 +46,16 @@ if(!isset($_SESSION['token']))
     }
 
     #rightpan {
-        height: 57vh;
+        height: 52vh;
         border: 2px solid rgba(128, 128, 128, 0.47);
         border-left: 0px;
         background-color: white;
+        background-image: url(img/3.jpg) ;
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: ;
+        padding: 10px;
+}
     }
 
     .row {
@@ -80,14 +86,23 @@ if(!isset($_SESSION['token']))
 
     }
 
-    .GO {
+    .GO a {
         margin-bottom: 10px;
+        text-decoration: none;
+        color:gray;
     }
     .downrow{
         height: 27vh;
     }
     .downrow  .card{
         height: 27vh;
+    }
+    .collection a.collection-item{
+        color:#574b6e;
+    }
+    .material-icons
+    {
+          color:#574b6e;
     }
 </style>
 
@@ -102,7 +117,7 @@ if(!isset($_SESSION['token']))
         </ul>
         <div class="row no-padign">
             <div class="col s3" id="leftP">
-                <div class="collection">
+                <div class="collection" style="color:574b6e">
                     <a href="example.php" class="collection-item active">Home</a>
                     <a href="#!" class="collection-item bold">Train</a>
                     <div class="asd">
@@ -115,16 +130,21 @@ if(!isset($_SESSION['token']))
                    
                 
                 </div>
-                <div class="row">
-                    <div class="col s3" >
-                     <a href='#!' id ="EXIT"><i class="material-icons right">exit_to_app</i></a>
-                </div></div>
+                <div class="row" style="    position: absolute;
+    bottom: 5vh;
+    left: 20vw;">
+                    <div class="col s4  " style = "margin-left: 1vw" >
+                     <a href='#!' id ="EXIT"><i class="medium material-icons right">exit_to_app</i></a></div>
+                      <div class="col s4" >
+                     <a href='#!' id ="#!"><i class=" medium material-icons right">brightness_low</i></a>
+                </div>
             </div>
+             </div>
             <div class="col s9" >
                 <div class="row" id="rightpan">
                     <div class="col s3 right">
                         <div class="center">
-                            <img class="responsive-img circle " src="img/1.jpg" style="border-style: dashed;">
+                            <img class="responsive-img circle " src="img/1.jpg" style="border-style: duble;">
 
                             <div class="card horizontal">
 
@@ -187,7 +207,7 @@ if(!isset($_SESSION['token']))
 
                             </div>
                             <div class="center GO">
-                                <a href="#">GO TO THE TESTS</a>
+                                <a href="test.php">GO TO THE TESTS</a>
 
                             </div>
                         </div>

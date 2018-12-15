@@ -109,5 +109,12 @@ nav{
 .MessageAlight{
     text-align: right;
 }
+.collection a.collection-item{
+        color:#574b6e;
+    }
+    .material-icons
+    {
+          color:#574b6e;
+    }
 
     

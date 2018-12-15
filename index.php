@@ -599,11 +599,10 @@ a {
 
                     },
                     success: function(data) { //Данные отправлены успешно
-                        $("#finalreg").text(data);
-                        $('.modal').modal('open');
+                        location.reload();
                     },
                     error: function(response) { // Данные не отправлены
-                        //alert(response);
+                        alert(response);
                     }
                 });
             }

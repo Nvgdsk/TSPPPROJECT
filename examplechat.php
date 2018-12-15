@@ -122,7 +122,7 @@ if(!isset($_SESSION['token']))
             <a href="#!" class="modal-close waves-effect waves-green btn-flat">Закрыть</a>
         </div>
     </div>
-     <div id="modal2" class="modal">
+    <div id="modal2" class="modal">
         <div class="modal-content" id="conProf">
 
 
@@ -139,20 +139,19 @@ if(!isset($_SESSION['token']))
 
         </ul>
         <div class="row no-padign">
-            <div class="col s3" id="leftP">
-                <div class="collection">
-                    <a href="example.php" class="collection-item ">Home</a>
-                    <a href="#!" class="collection-item bold">Train</a>
-                    <div class="asd">
-                        <a href="traine.php" class="collection-item">Flash Cards</a><a href="#!" class="collection-item">Audio Training</a>
-                        <a href="speech.php" class="collection-item">Speech Training</a>
-                    </div>
-                    <a href="#!" class="collection-item">Materials</a>
-                    <a href="examplechat.php" class="collection-item active">Chat</a>
+            <div class="col s1 center" id="leftP">
 
-                </div>
+                <a href="example.php" class="center  "><i class="medium material-icons">face</i></a>
+                <a href="pretraine.php" class="center"><i class="medium material-icons">extension</i></a>
+                <a href="dictionary.php" class="center "><i class="medium material-icons">import_contacts</i></a>
+                <a href="examplechat.php" class="center"><i class="medium material-icons">chat_bubble_outline</i></a>
+                <a href="#!" class="center"><i class="medium material-icons">book</i></a>
+                <a href="#!" class="center"><i class="medium material-icons">reorder</i></a>
+                <a href="test.php" class="center"><i class="medium material-icons">format_list_bulleted</i></a>
+
+
             </div>
-            <div class="col s9" id="rightpan">
+            <div class="col s11" id="rightpan">
                 <div class="row">
                     <div id='ChatH'>
 
@@ -194,9 +193,9 @@ if(!isset($_SESSION['token']))
 
             $('#ChatH').on('click', '.groupClass', function() {
                 let a = $(this).attr('id');
-                localStorage['lastChannel'] =  a;
+                localStorage['lastChannel'] = a;
                 $('#field_message').html('');
-                
+
                 setLocation('http://tspp/examplechat.php?namechat=' + a);
                 getMessageChat(a);
             });
@@ -221,7 +220,7 @@ if(!isset($_SESSION['token']))
 
                         $('#field_message').append(data);
 
-                        
+
 
                     }
                 });
@@ -236,12 +235,11 @@ if(!isset($_SESSION['token']))
                         $('#ChatH').append(data);
                         var lid = $('#ChatH').children().last().attr('id');
                         console.log(lid);
-                        if( localStorage['lastChannel']!='')
-                        {
-                            lid=localStorage['lastChannel'];
+                        if (localStorage['lastChannel'] != '') {
+                            lid = localStorage['lastChannel'];
                         }
-                        setLocation('http://tspp/examplechat.php?namechat=' + lid);
-                         getMessageChat(lid);
+                        setLocation('http://www.postavte100.com/examplechat.php?namechat=' + lid);
+                        getMessageChat(lid);
                         $('.tooltipped').tooltip();
                     }
                 });
@@ -255,7 +253,7 @@ if(!isset($_SESSION['token']))
                 var time = now.getFullYear() + '-' + (now.getMonth() + 1) + '-' + now.getDate() + ' ' + now.getHours() + ':' + now.getMinutes() + ':' + now.getSeconds();
 
                 let message = $("#inputMM").val();
-                let counts = (Number($(".MessageC").last().prop('id'))+1);
+                let counts = (Number($(".MessageC").last().prop('id')) + 1);
                 let a = `<div class='MessageC' id ='${(counts)}'><div class='row'>
                 <div class='col s6 offset-s1'>
                     <div class='user_m_id' id='<?php echo $_SESSION['USER_ID'];?>'></div>
@@ -279,7 +277,7 @@ if(!isset($_SESSION['token']))
                 var hhref = $(location).attr('href');
                 var lastIndex = hhref.lastIndexOf("namechat=");
 
-               hhref = hhref.substring((lastIndex + 9), (lastIndex + 18));
+                hhref = hhref.substring((lastIndex + 9), (lastIndex + 18));
                 $("#field_message").append(a);
                 $.ajax({
                     type: 'POST',
@@ -293,7 +291,7 @@ if(!isset($_SESSION['token']))
 
             })
             $('#field_message').on('click', '.user_m_id', function() {
-               
+
                 let id = $(this).attr('id');
                 $.ajax({
                     type: 'POST',
@@ -307,13 +305,13 @@ if(!isset($_SESSION['token']))
                     }
                 });
             })
-            setInterval(function(){
+            setInterval(function() {
                 var hhref = $(location).attr('href');
                 var lastIndex = hhref.lastIndexOf("namechat=");
 
-           hhref = hhref.substring((lastIndex + 9), (lastIndex + 18));
+                hhref = hhref.substring((lastIndex + 9), (lastIndex + 18));
                 getMessageChat(hhref);
-            },1000);
+            }, 1000);
 
             $('#field_message').on('click', '.user_m_id', function() {
                 let id = $(this).attr('id');
@@ -323,28 +321,28 @@ if(!isset($_SESSION['token']))
                     data: 'user_id=' + id,
 
                     success: function(data) {
-               
+
                         $('#conProf').html(data);
                         $('#modal2').modal('open');
                     }
                 });
             })
         });
-        $("#modal2").on('click','.sendml',
-                        function()
-                       {
-           let reciver_id = $(this).attr('id');
-             $.ajax({
+        $("#modal2").on('click', '.sendml',
+            function() {
+                let reciver_id = $(this).attr('id');
+                $.ajax({
                     type: 'POST',
                     url: 'jq_link.php?a=createchat',
                     data: 'reciver_id=' + reciver_id,
 
                     success: function(data) {
-               
-                        
+
+
                     }
                 });
-        })
+            })
+
     </script>
 </body>
 
